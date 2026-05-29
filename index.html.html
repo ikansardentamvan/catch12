@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catch the Box Game</title>
+
+  <!-- Hubungkan CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <h1>Catch the Box!</h1>
+  <p>Klik kotak merah secepat mungkin!</p>
+
+  <div id="box"></div>
+
+  <p id="score">Score: 0</p>
+  <p id="timer">Time: 30</p>
+
+  <div id="game-over">
+    Game Over!
+    <br>
+    <button onclick="restartGame()">Main Lagi</button>
+  </div>
+
+  <script>
+    const box = document.getElementById('box');
+    const scoreText = document.getElementById('score');
+    const timerText = document.getElementById('timer');
+    const gameOverText = document.getElementById('game-over');
+
+    let score = 0;
+    let timeLeft = 30;
+    let gameActive = true;
+
+    function moveBox() {
+      const x = Math.random() * (window.innerWidth - box.offsetWidth);
+      const y = Math.random() * (window.innerHeight - box.offsetHeight);
+
+      box.style.left = x + 'px';
+      box.style.top = y + 'px';
+
+      // warna random
+      box.style.background =
+        `hsl(${Math.random() * 360}, 80%, 50%)`;
+    }
+
+    box.addEventListener('click', () => {
+      if (!gameActive) return;
+
+      score++;
+      scoreText.textContent = 'Score: ' + score;
+
+      // makin kecil
+      const size = Math.max(20, 60 - score * 2);
+      box.style.width = size + 'px';
+      box.style.height = size + 'px';
+
+      moveBox();
+    });
+
+    function startTimer() {
+      const timer = setInterval(() => {
+        timeLeft--;
+        timerText.textContent = 'Time: ' + timeLeft;
+
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          endGame();
+        }
+      }, 1000);
+    }
+
+    function endGame() {
+      gameActive = false;
+      box.style.display = 'none';
+      gameOverText.style.display = 'block';
+    }
+
+    function restartGame() {
+      score = 0;
+      timeLeft = 30;
+      gameActive = true;
+
+      scoreText.textContent = 'Score: 0';
+      timerText.textContent = 'Time: 30';
+
+      box.style.display = 'block';
+      gameOverText.style.display = 'none';
+
+      box.style.width = '60px';
+      box.style.height = '60px';
+
+      moveBox();
+      startTimer();
+    }
+
+    moveBox();
+    startTimer();
+
+    window.addEventListener('resize', moveBox);
+  </script>
+
+</body>
+</html>

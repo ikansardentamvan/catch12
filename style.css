@@ -1,0 +1,58 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    overflow: hidden;
+    background: #f2f2f2;
+  }
+  
+  /* Judul */
+  h1 {
+    margin-top: 20px;
+    color: #333;
+  }
+  
+  /* Kotak game */
+  #box {
+    width: 60px;
+    height: 60px;
+    background: red;
+    position: absolute;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: top 0.15s, left 0.15s;
+  }
+  
+  /* Score & timer */
+  #score,
+  #timer {
+    font-size: 22px;
+    margin: 10px;
+    font-weight: bold;
+  }
+  
+  /* Game over */
+  #game-over {
+    display: none;
+    font-size: 30px;
+    color: darkred;
+    margin-top: 20px;
+  }
+  
+  /* Tombol */
+  button {
+    padding: 10px 20px;
+    font-size: 18px;
+    margin-top: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    background: #ff4d4d;
+    color: white;
+    transition: 0.3s;
+  }
+  
+  /* Hover tombol */
+  button:hover {
+    background: #cc0000;
+  }
